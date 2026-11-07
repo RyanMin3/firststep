@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FirstStep — безпечний підробіток для підлітків 16–17 років</title>
+<meta name="description" content="FirstStep допомагає підліткам 16–17 років знайти безпечний підробіток. Демонстраційна версія.">
+<style>
+:root{
+  --bg:#F5F7FF; --surface:#FFFFFF; --ink:#14173A; --muted:#5A5F85; --line:#DDE1F5;
+  --brand:#4F46E5; --cta:#FFD23F; --cta-ink:#14173A;
+  --tint-a:#E4E2FF; --tint-b:#FFF0B8; --tint-c:#D5F5E6;
+  --font:"Avenir Next","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --radius:20px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0F1128; --surface:#181B3A; --ink:#EEF0FF; --muted:#A3A8D0; --line:#2A2E58;
+    --brand:#8B85FF;
+    --tint-a:#2A2766; --tint-b:#4A3F12; --tint-c:#14412F;
+    color-scheme:dark;
+  }
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,100% - 2.5rem);margin-inline:auto}
+
+/* Шапка */
+header{padding-block:1.25rem}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.logo{display:flex;align-items:center;gap:.6rem;font-weight:800;font-size:1.3rem;letter-spacing:-.03em}
+.logo-mark{display:grid;grid-template-columns:repeat(3,8px);align-items:end;gap:2px;height:24px}
+.logo-mark i{display:block;background:var(--brand);border-radius:2px}
+.logo-mark i:nth-child(1){height:8px}
+.logo-mark i:nth-child(2){height:16px}
+.logo-mark i:nth-child(3){height:24px;background:var(--cta)}
+nav ul{display:flex;gap:2rem;list-style:none;margin:0;padding:0;font-weight:600;font-size:.95rem;color:var(--muted)}
+nav a{padding-block:.25rem}
+nav a:hover{color:var(--ink)}
+
+/* Головний блок */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:3rem;padding-block:3.5rem 4.5rem}
+h1{font-weight:800;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.035em;margin:0 0 1.25rem;text-wrap:balance}
+.lead{max-width:33rem;margin:0 0 2.25rem;color:var(--muted);font-size:1.15rem}
+.btn{display:inline-block;padding:1.2rem 2.4rem;background:var(--cta);color:var(--cta-ink);font-weight:800;font-size:1.2rem;border-radius:16px;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(5px,5px);box-shadow:0 0 0 var(--ink)}
+.hint{margin:1.25rem 0 0;color:var(--muted);font-size:.95rem}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);align-items:end;gap:.6rem;height:19rem}
+.step{border-radius:16px 16px 0 0;padding:1rem;font-weight:700;font-size:.95rem;line-height:1.3;color:#14173A}
+.step:nth-child(1){height:42%;background:var(--tint-a)}
+.step:nth-child(2){height:70%;background:var(--tint-b)}
+.step:nth-child(3){height:100%;background:var(--brand);color:#fff}
+@media (prefers-reduced-motion:no-preference){
+  .step{transform-origin:bottom;animation:rise .7s cubic-bezier(.2,.8,.2,1) both}
+  .step:nth-child(2){animation-delay:.12s}
+  .step:nth-child(3){animation-delay:.24s}
+  @keyframes rise{from{transform:scaleY(.2);opacity:0}to{transform:none;opacity:1}}
+}
+
+/* Вакансії */
+.jobs{padding-bottom:5rem;scroll-margin-top:1rem}
+.jobs-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;margin-bottom:1.5rem}
+.jobs-head h2{font-weight:800;font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.025em;margin:0}
+.jobs-head p{margin:0;color:var(--muted);font-size:.95rem}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;list-style:none;margin:0;padding:0}
+.card{display:flex;flex-direction:column;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius);padding:1.5rem}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.25rem}
+.icon{display:grid;place-items:center;width:3rem;height:3rem;border-radius:14px}
+.icon svg{width:24px;height:24px;stroke:#14173A;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.card:nth-child(1) .icon{background:var(--tint-c)}
+.card:nth-child(2) .icon{background:var(--tint-b)}
+.card:nth-child(3) .icon{background:var(--tint-a)}
+.age{padding:.25rem .75rem;border-radius:999px;background:var(--tint-c);color:var(--ink);font-weight:800;font-size:.9rem}
+.card h3{font-weight:800;font-size:1.35rem;letter-spacing:-.02em;margin:0 0 .35rem}
+.place{margin:0 0 1.25rem;color:var(--muted);font-size:.95rem}
+.facts{margin:0 0 1.5rem;padding:1.1rem 0 0;border-top:1.5px solid var(--line);display:grid;gap:.75rem}
+.facts div{display:flex;justify-content:space-between;gap:1rem}
+.facts dt{color:var(--muted);font-size:.95rem}
+.facts dd{margin:0;font-weight:700;text-align:right}
+.pay{color:var(--brand)}
+.more{margin-top:auto;display:block;padding:.8rem 1rem;text-align:center;font-weight:700;border:1.5px solid var(--line);border-radius:12px}
+.more:hover{border-color:var(--brand)}
+
+/* Адаптивність */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:2.5rem;padding-block:2rem 3rem}
+  .steps{height:12rem}
+  .grid{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .bar{flex-wrap:wrap;gap:.75rem}
+  nav{order:3;width:100%;overflow-x:auto}
+  nav ul{gap:1.5rem;white-space:nowrap}
+  .btn{display:block;text-align:center;width:100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#" aria-label="FirstStep — на головну">
+      <span class="logo-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      FirstStep
+    </a>
+    <nav aria-label="Основне меню">
+      <ul>
+        <li><a href="#vacancies">Вакансії</a></li>
+        <li><a href="#how">Як це працює</a></li>
+        <li><a href="#safety">Безпека</a></li>
+        <li><a href="#parents">Для батьків</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero" id="how">
+    <div>
+      <h1>Знайди безпечний підробіток поруч із домом</h1>
+      <p class="lead">Вакансії для підлітків 16–17 років: зрозумілий графік, чесна оплата і перевірені роботодавці.</p>
+      <a class="btn" href="#vacancies">Знайти підробіток</a>
+      <p class="hint">Без реєстрації. Це демонстраційна версія сайту.</p>
+    </div>
+    <div class="steps" aria-hidden="true">
+      <div class="step">Обираєш вакансію</div>
+      <div class="step">Отримуєш досвід</div>
+      <div class="step">Заробляєш перші гроші</div>
+    </div>
+  </section>
+
+  <section class="wrap jobs" id="vacancies" aria-labelledby="jobs-title">
+    <div class="jobs-head">
+      <h2 id="jobs-title">Вакансії для початку</h2>
+      <p>Демонстраційні приклади, не реальні пропозиції</p>
+    </div>
+    <ul class="grid">
+      <li class="card">
+        <div class="card-top">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17l4-8h5l4 8M9.5 9L8 6H6M14.5 9l-2.5 8"/></svg></span>
+          <span class="age">16+</span>
+        </div>
+        <h3>Кур’єр</h3>
+        <p class="place">Доставка в межах свого району, пішки або велосипедом</p>
+        <dl class="facts">
+          <div><dt>Графік</dt><dd>Пн–Пт, 3 год після школи</dd></div>
+          <div><dt>Оплата</dt><dd class="pay">від 150 грн/год</dd></div>
+        </dl>
+        <a class="more" href="#vacancies">Детальніше</a>
+      </li>
+      <li class="card">
+        <div class="card-top">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 9h12v5a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5V9z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M9 3v3M13 3v3"/></svg></span>
+          <span class="age">16+</span>
+        </div>
+        <h3>Помічник бариста</h3>
+        <p class="place">Кав’ярня біля дому, навчання на місці</p>
+        <dl class="facts">
+          <div><dt>Графік</dt><dd>Сб–Нд, до 5 год</dd></div>
+          <div><dt>Оплата</dt><dd class="pay">від 140 грн/год + чайові</dd></div>
+        </dl>
+        <a class="more" href="#vacancies">Детальніше</a>
+      </li>
+      <li class="card">
+        <div class="card-top">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10v4l11 4V6L3 10z"/><path d="M14 9a3 3 0 0 1 0 6M7 14.5l1.5 5h2.5l-1-4"/></svg></span>
+          <span class="age">16+</span>
+        </div>
+        <h3>Промоутер</h3>
+        <p class="place">Роздача листівок у торговому центрі, у денний час</p>
+        <dl class="facts">
+          <div><dt>Графік</dt><dd>Вихідні, 3–4 год</dd></div>
+          <div><dt>Оплата</dt><dd class="pay">від 130 грн/год</dd></div>
+        </dl>
+        <a class="more" href="#vacancies">Детальніше</a>
+      </li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
